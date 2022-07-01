@@ -1,0 +1,46 @@
+<h4>Login Form</h4>
+
+<form [formGroup]="profileForm" #formDir="ngForm">
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>User Name</mat-label>
+      <input
+        placeholder="Vasia Pupkin"
+        matInput
+        id="userName"
+        type="text"
+        formControlName="userName"
+      />
+      <mat-error *ngIf="userName.invalid">
+        {{getErrorMessage(userName)}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        id="password"
+        type="password"
+        formControlName="password"
+      />
+      <mat-error *ngIf="password.invalid">
+        {{getErrorMessage(password)}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+</form>
+
+<button
+  class="btn btn-success mt-2"
+  [disabled]="profileForm.invalid"
+  (click)="onLoginFormSubmit()"
+>
+  Sign In
+</button>
+
+<div *ngIf="!isLoginSucceeded" class="alert alert-danger mt-1">
+  {{ errorMessage }}
+</div>

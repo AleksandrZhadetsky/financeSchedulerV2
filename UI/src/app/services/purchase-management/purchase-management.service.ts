@@ -1,0 +1,83 @@
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, throwError } from "rxjs";
+import { tap, catchError } from "rxjs/operators";
+import { DeleteCommand } from "src/app/models/commands/delete-command";
+import { PurchaseCreationModel } from "src/app/models/purchases/purchase-creation-model";
+import { PurchaseModel } from "src/app/models/purchases/purchase-model";
+import { CommandResponse } from "src/app/models/responses/command-response";
+import { AppStateService } from "src/app/state/app-state.service";
+import { environment } from "src/environments/environment";
+
+@Injectable({
+  providedIn: "root",
+})
+export class PurchaseManagementService {
+  private readonly controller = "purchases";
+  private readonly createAction = "create";
+  private readonly getAllAction = "getAll";
+  private readonly deleteAction = "delete";
+
+  constructor(private httpClient: HttpClient, private store: AppStateService) {}
+
+  public registerPurchase(
+    purchase: PurchaseCreationModel
+  ): Observable<CommandResponse<PurchaseModel>> {
+    return this.httpClient
+      .post<CommandResponse<PurchaseModel>>(
+        `${environment.apiUrl}/${this.controller}/${this.createAction}`,
+        purchase
+      )
+      .pipe(
+        tap((response) => {
+          if (!!response.responseModel) {
+            this.store.purchases.push(response.responseModel);
+          }
+        }),
+        catchError((error) => {
+          console.log("error caught in service");
+          console.error(error);
+
+          return throwError(error); // Rethrow it back to component
+        })
+      );
+  }
+
+  public getPurchases(
+    purchase: PurchaseCreationModel
+  ): Observable<CommandResponse<PurchaseModel[]>> {
+    return this.httpClient
+      .get<CommandResponse<PurchaseModel[]>>(
+        `${environment.apiUrl}/${this.controller}/${this.getAllAction}`,
+      )
+      .pipe(
+        tap((response) => {
+          if (!!response.responseModel) {
+            this.store.purchases.concat(response.responseModel);
+          }
+        }),
+        catchError((error) => {
+          console.log("error caught in service");
+          console.error(error);
+
+          return throwError(error); // Rethrow it back to component
+        })
+      );
+  }
+
+  public deletePurchase(id: string): Observable<CommandResponse<null>> {
+    return this.httpClient
+      .post<CommandResponse<null>>(
+        `${environment.apiUrl}/${this.controller}/${this.deleteAction}`,
+        new DeleteCommand(id)
+      )
+      .pipe(
+        catchError((error) => {
+          console.log("error caught in service");
+          console.error(error);
+
+          return throwError(error); // Rethrow it back to component
+        })
+      );
+  }
+}
