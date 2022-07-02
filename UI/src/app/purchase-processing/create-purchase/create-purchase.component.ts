@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { CategoryModel } from "src/app/models/categories/category-model";
 import { PurchaseCreationModel } from "src/app/models/purchases/purchase-creation-model";
 import { CategoryManagementService } from "src/app/services/category-management/category-management.service";
@@ -14,6 +14,8 @@ import { AppStateService } from "src/app/state/app-state.service";
 export class CreatePurchaseComponent implements OnInit {
   private createdById!: string;
 
+  @Output() purchaseCreated = new EventEmitter();
+
   public categories!: CategoryModel[];
   public submitBtnDisabled!: boolean;
   public purchaseName!: string;
@@ -28,7 +30,7 @@ export class CreatePurchaseComponent implements OnInit {
     private identityService: IdentityService
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.createdById = this.identityService.userValue.id;
     this.categories = this.store.categories;
     if (!this.categories || !this.categories.length) {
@@ -42,7 +44,7 @@ export class CreatePurchaseComponent implements OnInit {
 
   public onPurchaseCreationTriggered(): void {
     this.service
-      .registerPurchase(
+      .createPurchase(
         new PurchaseCreationModel(
           this.purchaseName,
           this.purchaseCost,
@@ -51,6 +53,10 @@ export class CreatePurchaseComponent implements OnInit {
           this.createdById
         )
       )
-      .subscribe();
+      .subscribe(
+        () => {
+          this.purchaseCreated.emit('purchase created');
+        }
+      );
   }
 }

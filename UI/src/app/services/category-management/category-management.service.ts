@@ -21,7 +21,7 @@ export class CategoryManagementService {
 
   constructor(private httpClient: HttpClient, private store: AppStateService) {}
 
-  public registerCategory(
+  public createCategory(
     category: CategoryCreationModel
   ): Observable<CommandResponse<CategoryModel>> {
     return this.httpClient

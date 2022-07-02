@@ -20,7 +20,7 @@ export class PurchaseManagementService {
 
   constructor(private httpClient: HttpClient, private store: AppStateService) {}
 
-  public registerPurchase(
+  public createPurchase(
     purchase: PurchaseCreationModel
   ): Observable<CommandResponse<PurchaseModel>> {
     return this.httpClient

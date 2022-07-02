@@ -3,10 +3,12 @@ using Handlers.PurchasesProcessing.Delete;
 using Handlers.PurchasesProcessing.Get;
 using Handlers.PurchasesProcessing.Update;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceSchedulerDemo.Controllers
 {
+    [Authorize(Roles = "user")]
     [Route("purchases")]
     [ApiController]
     public class PurchasesController : ControllerBase
@@ -38,8 +40,9 @@ namespace FinanceSchedulerDemo.Controllers
 
         [HttpPost]
         [Route("getAll")]
-        public async Task<IActionResult> GetPurchasesAsync(GetPurchasesQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetPurchasesAsync(CancellationToken cancellationToken)
         {
+            var query = new GetPurchasesQuery();
             var response = await mediator.Send(query, cancellationToken).ConfigureAwait(false);
 
             return Ok(response);

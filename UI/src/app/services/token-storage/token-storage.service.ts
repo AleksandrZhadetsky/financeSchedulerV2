@@ -10,18 +10,18 @@ export class TokenStorage {
    * Get access token
    * @returns {Observable<string>}
    */
-  public getAccessToken(): Observable<string> {
-    const token: string = <string>localStorage.getItem('accessToken');
-    return of(token);
+  public getAccessToken(): string {
+    const token = <string>localStorage.getItem('accessToken');
+    return token;
   }
 
   /**
    * Get refresh token
    * @returns {Observable<string>}
    */
-  public getRefreshToken(): Observable<string> {
-    const token: string = <string>localStorage.getItem('refreshToken');
-    return of(token);
+  public getRefreshToken(): string {
+    const token = <string>localStorage.getItem('refreshToken');
+    return token;
   }
 
   /**

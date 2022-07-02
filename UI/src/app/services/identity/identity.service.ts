@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, throwError } from "rxjs";
+import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { SignInRequest } from "src/app/models/identity/requests/signInRequest";
 import { SignUpRequest } from "src/app/models/identity/requests/signUpRequest";
@@ -44,10 +44,10 @@ export class IdentityService {
   }
 
   public isAuthenticated(): Observable<boolean> {
-    return this.tokenStorage.getAccessToken().pipe(map((token) => !!token));
+    return of(!!this.tokenStorage.getAccessToken());
   }
 
-  public getAccessToken(): Observable<string> {
+  public getAccessToken(): string {
     return this.tokenStorage.getAccessToken();
   }
 

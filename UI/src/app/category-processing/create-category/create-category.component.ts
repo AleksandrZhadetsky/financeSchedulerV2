@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { CategoryCreationModel } from "src/app/models/categories/category-creation-model";
 import { CategoryManagementService } from "src/app/services/category-management/category-management.service";
 
@@ -8,6 +8,8 @@ import { CategoryManagementService } from "src/app/services/category-management/
   styleUrls: ["./create-category.component.scss"],
 })
 export class CreateCategoryComponent implements OnInit {
+  @Output() categoryCreated = new  EventEmitter();
+
   public categoryName = "";
   public categoryDescription = "";
 
@@ -19,9 +21,13 @@ export class CreateCategoryComponent implements OnInit {
 
   public onCategoryCreationTriggered(): void {
     this.service
-      .registerCategory(
+      .createCategory(
         new CategoryCreationModel(this.categoryName, this.categoryDescription)
       )
-      .subscribe();
+      .subscribe(
+        () => {
+          this.categoryCreated.emit('category created');
+        }
+      );
   }
 }

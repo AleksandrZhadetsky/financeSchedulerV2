@@ -33,9 +33,10 @@ namespace Handlers.User.Identity.Registration
         {
             var userExists = await userManager.FindByNameAsync(command.UserName);
             var errors = new List<string>();
+
             if (userExists is not null)
             {
-                errors.Add("User with the same credentials already exists");
+                errors.Add("User with the same name already exists");
 
                 return new IdentityResponse(false, errors);
             }

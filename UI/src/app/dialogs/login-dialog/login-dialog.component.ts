@@ -24,7 +24,7 @@ export class LoginDialogComponent implements OnInit {
   ]);
   public password = new FormControl("", [
     Validators.required,
-    Validators.minLength(6),
+    Validators.minLength(5),
     Validators.maxLength(20),
   ]);
 
@@ -48,7 +48,7 @@ export class LoginDialogComponent implements OnInit {
       ]),
       password: new FormControl(this.passwordValue, [
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(5),
         Validators.maxLength(20),
       ]),
     });

@@ -3,10 +3,12 @@ using Handlers.CategoriesProcessing.Delete;
 using Handlers.CategoriesProcessing.Get;
 using Handlers.CategoriesProcessing.Update;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceSchedulerDemo.Controllers
 {
+    [Authorize(Roles = "user")]
     [Route("categories")]
     [ApiController]
     public class CategoriesController : ControllerBase

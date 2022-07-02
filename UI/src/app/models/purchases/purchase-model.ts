@@ -3,6 +3,7 @@ export class PurchaseModel {
     public id: string,
     public name: string,
     public cost: number,
-    public count: number
+    public count: number,
+    public creationDate: Date
   ) {}
 }

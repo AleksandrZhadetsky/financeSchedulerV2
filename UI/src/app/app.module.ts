@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 
 import { AppComponent } from "./app.component";
@@ -16,10 +16,12 @@ import { AccountModule } from "./account/account.module";
 import { TabsModule } from "./nav-menu/tabs/tabs.module";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
-import { PurchasesModule } from "./purchase-management/purchases.module";
 import { DialogsModule } from "./dialogs/dialogs.module";
 import { UserAccountPageComponent } from "./account/user-account-page/user-account-page.component";
 import { AuthGuard } from "./services/identity/auth-guard/auth-guard";
+import { PurchaseListComponent } from "./purchase-processing/purchase-list/purchase-list.component";
+import { PurchasesModule } from "./purchase-processing/purchases.module";
+import { JwtInterceptor } from "./services/identity/jwt.interceptor";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavMenuComponent],
@@ -40,11 +42,13 @@ import { AuthGuard } from "./services/identity/auth-guard/auth-guard";
       { path: 'account/:id', component: UserAccountPageComponent, canActivate: [AuthGuard] },
     ]),
     BrowserAnimationsModule,
-    AccountModule,
     PurchasesModule,
     DialogsModule,
   ],
-  providers: [IdentityService],
+  providers: [
+    IdentityService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

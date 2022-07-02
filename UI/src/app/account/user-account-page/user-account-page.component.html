@@ -19,7 +19,7 @@
       </mat-expansion-panel-header>
       <mat-card>
         <mat-card-content>
-          <app-create-purchase></app-create-purchase>
+          <app-create-purchase (purchaseCreated)="onPurchaseCreated()"></app-create-purchase>
         </mat-card-content>
       </mat-card>
     </mat-expansion-panel>
@@ -29,7 +29,7 @@
       </mat-expansion-panel-header>
       <mat-card>
         <mat-card-content>
-          <app-create-category></app-create-category>
+          <app-create-category (categoryCreated)="onCategoryCreated()"></app-create-category>
         </mat-card-content>
       </mat-card>
     </mat-expansion-panel>
