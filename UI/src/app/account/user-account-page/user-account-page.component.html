@@ -19,7 +19,10 @@
       </mat-expansion-panel-header>
       <mat-card>
         <mat-card-content>
-          <app-create-purchase (purchaseCreated)="onPurchaseCreated()"></app-create-purchase>
+          <app-create-purchase
+          (purchaseCreated)="onPurchaseCreationStarted($event)"
+          [categories]="categories"
+        ></app-create-purchase>
         </mat-card-content>
       </mat-card>
     </mat-expansion-panel>
@@ -29,7 +32,9 @@
       </mat-expansion-panel-header>
       <mat-card>
         <mat-card-content>
-          <app-create-category (categoryCreated)="onCategoryCreated()"></app-create-category>
+          <app-create-category
+          (categoryCreationStarted)="onCategoryCreationStarted($event)"
+        ></app-create-category>
         </mat-card-content>
       </mat-card>
     </mat-expansion-panel>
