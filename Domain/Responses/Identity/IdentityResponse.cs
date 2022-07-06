@@ -1,10 +1,10 @@
-﻿using Domain.Models;
+﻿using Domain.DTOs;
 
 namespace Domain.Responses.Identity
 {
     public class IdentityResponse
     {
-        public UserModel User { get; set; }
+        public UserDTO User { get; set; }
 
         public string Token { get; set; }
 
@@ -18,14 +18,14 @@ namespace Domain.Responses.Identity
             Errors = errors;
         }
 
-        public IdentityResponse(UserModel user, string token, bool succeeded)
+        public IdentityResponse(UserDTO user, string token, bool succeeded)
         {
             User = user;
             Token = token;
             Succeeded = succeeded;
         }
 
-        public IdentityResponse(UserModel user, string token, bool succeeded, IEnumerable<string> errors) : this(user, token, succeeded)
+        public IdentityResponse(UserDTO user, string token, bool succeeded, IEnumerable<string> errors) : this(user, token, succeeded)
         {
             Errors = errors;
         }

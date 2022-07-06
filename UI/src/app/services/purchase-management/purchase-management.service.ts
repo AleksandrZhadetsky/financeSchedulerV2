@@ -31,7 +31,7 @@ export class PurchaseManagementService {
       .pipe(
         tap((response) => {
           if (!!response.responseModel) {
-            this.store.purchases.push(response.responseModel);
+            this.store.purchases.next([...this.store.purchases.value, response.responseModel]);
           }
         }),
         catchError((error) => {
@@ -43,9 +43,7 @@ export class PurchaseManagementService {
       );
   }
 
-  public getPurchases(
-    purchase: PurchaseCreationModel
-  ): Observable<CommandResponse<PurchaseModel[]>> {
+  public getPurchases(): Observable<CommandResponse<PurchaseModel[]>> {
     return this.httpClient
       .get<CommandResponse<PurchaseModel[]>>(
         `${environment.apiUrl}/${this.controller}/${this.getAllAction}`,
@@ -53,7 +51,7 @@ export class PurchaseManagementService {
       .pipe(
         tap((response) => {
           if (!!response.responseModel) {
-            this.store.purchases.concat(response.responseModel);
+            this.store.purchases.next(response.responseModel);
           }
         }),
         catchError((error) => {

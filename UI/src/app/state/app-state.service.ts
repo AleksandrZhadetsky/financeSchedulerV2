@@ -7,27 +7,11 @@ import { PurchaseModel } from "../models/purchases/purchase-model";
   providedIn: "root",
 })
 export class AppStateService {
-  private readonly _purchases = new BehaviorSubject<PurchaseModel[]>([]);
-  private readonly _categories = new BehaviorSubject<CategoryModel[]>([]);
+  public readonly purchases = new BehaviorSubject<PurchaseModel[]>([]);
+  public readonly categories = new BehaviorSubject<CategoryModel[]>([]);
 
-  public readonly purchases$ = this._purchases.asObservable();
-  public readonly categories$ = this._categories.asObservable();
+  public readonly purchases$ = this.purchases.asObservable();
+  public readonly categories$ = this.categories.asObservable();
 
   constructor() {}
-
-  get purchases(): PurchaseModel[] {
-    return this._purchases.getValue();
-  }
-
-  set purchases(val: PurchaseModel[]) {
-    this._purchases.next(val);
-  }
-
-  get categories(): CategoryModel[] {
-    return this._categories.getValue();
-  }
-
-  set categories(val: CategoryModel[]) {
-    this._categories.next(val);
-  }
 }

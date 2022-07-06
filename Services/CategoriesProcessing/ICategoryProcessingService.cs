@@ -1,4 +1,4 @@
-﻿using Domain.Categories;
+﻿using Domain.Entities.Categories;
 
 namespace Services.Categories
 {

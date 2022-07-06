@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatAccordion } from "@angular/material/expansion";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Observable } from "rxjs";
 import { CategoryCreationModel } from "src/app/models/categories/category-creation-model";
 import { CategoryModel } from "src/app/models/categories/category-model";
 import { PurchaseCreationModel } from "src/app/models/purchases/purchase-creation-model";
+import { PurchaseModel } from "src/app/models/purchases/purchase-model";
 import { CategoryManagementService } from "src/app/services/category-management/category-management.service";
 import { PurchaseManagementService } from "src/app/services/purchase-management/purchase-management.service";
 import { AppStateService } from "src/app/state/app-state.service";
@@ -21,7 +23,8 @@ export class UserAccountPageComponent implements OnInit {
 
   public readonly user: IdentityUser;
   public panelOpenState = false;
-  public categories!: CategoryModel[];
+  public categories$!: Observable<CategoryModel[]>;
+  public purchases$!: Observable<PurchaseModel[]>;
 
   constructor(
     private identityService: IdentityService,
@@ -35,12 +38,19 @@ export class UserAccountPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.createdById = this.identityService.userValue.id;
-    this.categories = this.store.categories;
-    if (!this.categories || !this.categories.length) {
+    this.categories$ = this.store.categories$;
+    if (!this.store.categories.value.length) {
       this.categoryService.getCategories()
         .subscribe(categories => {
-          this.categories = categories.responseModel;
-          this.store.categories = categories.responseModel;
+          this.store.categories.next(categories.responseModel);
+        });
+    }
+
+    this.purchases$ = this.store.purchases$;
+    if (!this.store.purchases.value.length) {
+      this.purchaseService.getPurchases()
+        .subscribe(purchases => {
+          this.store.purchases.next(purchases.responseModel);
         });
     }
   }

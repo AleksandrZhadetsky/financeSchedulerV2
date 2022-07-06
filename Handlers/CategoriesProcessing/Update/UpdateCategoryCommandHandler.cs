@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using Domain.Categories;
-using Domain.Models;
+using Domain.Entities.Categories;
+using Domain.DTOs;
 using Domain.Responses;
 using MediatR;
 using Services.Categories;
 
 namespace Handlers.CategoriesProcessing.Update
 {
-    public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, CommandResponse<CategoryModel>>
+    public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, CommandResponse<CategoryDTO>>
     {
         private readonly ICategoryProcessingService service;
         private readonly IMapper mapper;
@@ -18,12 +18,12 @@ namespace Handlers.CategoriesProcessing.Update
             this.mapper = mapper;
         }
 
-        public async Task<CommandResponse<CategoryModel>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<CategoryDTO>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = mapper.Map<UpdateCategoryCommand, Category>(request);
             var updatedCategoryEntity = await service.UpdateCategoryAsync(category, cancellationToken);
-            var updatedCategoryModel = mapper.Map<Category, CategoryModel>(updatedCategoryEntity);
-            var response = new CommandResponse<CategoryModel>(updatedCategoryModel, "Category item updated successfully.");
+            var updatedCategoryModel = mapper.Map<Category, CategoryDTO>(updatedCategoryEntity);
+            var response = new CommandResponse<CategoryDTO>(updatedCategoryModel, "Category item updated successfully.");
 
             return response;
         }

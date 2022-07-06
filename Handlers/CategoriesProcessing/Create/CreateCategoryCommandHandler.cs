@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using Domain.Categories;
-using Domain.Models;
+using Domain.Entities.Categories;
+using Domain.DTOs;
 using Domain.Responses;
 using MediatR;
 using Services.Categories;
 
 namespace Handlers.CategoriesProcessing.Create
 {
-    public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CommandResponse<CategoryModel>>
+    public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CommandResponse<CategoryDTO>>
     {
         private readonly ICategoryProcessingService service;
         private readonly IMapper mapper;
@@ -18,21 +18,21 @@ namespace Handlers.CategoriesProcessing.Create
             this.mapper = mapper;
         }
 
-        public async Task<CommandResponse<CategoryModel>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<CategoryDTO>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = mapper.Map<CreateCategoryCommand, Category>(request);
 
             try
             {
                 var createdCategory = await service.CreateCategoryAsync(category, cancellationToken);
-                var categoryModel = mapper.Map<Category, CategoryModel>(createdCategory);
-                var response = new CommandResponse<CategoryModel>(categoryModel, "Category item created successfully.");
+                var categoryModel = mapper.Map<Category, CategoryDTO>(createdCategory);
+                var response = new CommandResponse<CategoryDTO>(categoryModel, "Category item created successfully.");
 
                 return response;
             }
             catch (Exception e)
             {
-                return new CommandResponse<CategoryModel>($"Category creation failed. Reason: {e.Message}");
+                return new CommandResponse<CategoryDTO>($"Category creation failed. Reason: {e.Message}");
             }
         }
     }

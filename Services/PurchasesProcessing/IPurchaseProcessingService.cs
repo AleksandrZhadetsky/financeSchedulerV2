@@ -1,4 +1,4 @@
-﻿using Domain.Purchases;
+﻿using Domain.Entities.Purchases;
 
 namespace Services.Purchases
 {
@@ -12,7 +12,7 @@ namespace Services.Purchases
         /// <returns>
         /// Instance of type <see cref="Purchase"/>.
         /// </returns>
-        ValueTask<Purchase> GetPurchaseAsync(string id);
+        ValueTask<Purchase> GetPurchaseAsync(string id, CancellationToken cancellationToken);
 
         /// <summary>
         /// Method for retrieving specific purchase.
@@ -20,7 +20,7 @@ namespace Services.Purchases
         /// <returns>
         /// Instance of type <see cref="ValueTask{IList{Purchase}}"/>.
         /// </returns>
-        ValueTask<IList<Purchase>> GetPurchasesAsync();
+        ValueTask<IList<Purchase>> GetPurchasesAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Method for creating the purchase.
@@ -30,7 +30,7 @@ namespace Services.Purchases
         /// <returns>
         /// Instance of type <see cref="Purchase"/>.
         /// </returns>
-        ValueTask<Purchase> CreatePurchaseAsync(Purchase purchase);
+        ValueTask<Purchase> CreatePurchaseAsync(Purchase purchase, CancellationToken cancellationToken);
 
         /// <summary>
         /// Method for deleting specific purchase.
@@ -38,7 +38,7 @@ namespace Services.Purchases
         /// <param name="id">Instance of type <see cref="string"/>.</param>
         /// <param name="cancellationToken">Instance of type <see cref="CancellationToken"/>.</param>
         /// <returns></returns>
-        ValueTask DeletePurchaseAsync(string id);
+        ValueTask DeletePurchaseAsync(string id, CancellationToken cancellationToken);
 
         /// <summary>
         /// Method for updating specific purchase.
@@ -48,6 +48,6 @@ namespace Services.Purchases
         /// <returns>
         /// Instance of type <see cref="Purchase"/>.
         /// </returns>
-        ValueTask<Purchase> UpdatePurchaseAsync(Purchase purchase);
+        ValueTask<Purchase> UpdatePurchaseAsync(Purchase purchase, CancellationToken cancellationToken);
     }
 }

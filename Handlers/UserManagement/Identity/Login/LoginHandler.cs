@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Domain.Models;
+using Domain.DTOs;
 using Domain.Responses.Identity;
-using Domain.User;
+using Domain.Entities.User;
 using Handlers.Security;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -35,7 +35,7 @@ namespace Handlers.User.Identity.Login
             if (userExists && loginSucceeded)
             {
                 var token = await tokenGenerator.GetTokenAsync(user);
-                var userModel = mapper.Map<AppUser, UserModel>(user);
+                var userModel = mapper.Map<AppUser, UserDTO>(user);
 
                 return new IdentityResponse(userModel, token, true);
             }

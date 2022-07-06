@@ -1,8 +1,8 @@
 using DAL.DbContext;
-using Domain.Models;
+using Domain.DTOs;
 using Domain.Responses;
 using Domain.Responses.Identity;
-using Domain.User;
+using Domain.Entities.User;
 using Handlers.Admin.Identity.Registration;
 using Handlers.CategoriesProcessing.Create;
 using Handlers.CategoriesProcessing.Delete;
@@ -77,23 +77,23 @@ builder.Services.AddAuthentication(
     );
 
 builder.Services.AddScoped<TokenGenerator>();
-builder.Services.AddScoped<IPurchaseProcessingService, PurchasesService>();
-builder.Services.AddScoped<ICategoryProcessingService, CategoriesService>();
+builder.Services.AddScoped<ICategoryProcessingService, CategoryProcessingService>();
+builder.Services.AddScoped<IPurchaseProcessingService, PurchaseProcessingService>();
 builder.Services.AddTransient<IRequestHandler<RegistrationCommand, IdentityResponse>, RegistrationHandler>();
 builder.Services.AddTransient<IRequestHandler<AdminRegistrationCommand, IdentityResponse>, AdminRegistrationHandler>();
 builder.Services.AddTransient<IRequestHandler<LoginQuery, IdentityResponse>, LoginHandler>();
 
-builder.Services.AddTransient<IRequestHandler<CreateCategoryCommand, CommandResponse<CategoryModel>>, CreateCategoryCommandHandler>();
-builder.Services.AddTransient<IRequestHandler<GetCategoryQuery, CommandResponse<CategoryModel>>, GetCategoryCommandHandler>();
-builder.Services.AddTransient<IRequestHandler<GetCategoriesQuery, CommandResponse<IEnumerable<CategoryModel>>>, GetCategoriesCommandHandler>();
-builder.Services.AddTransient<IRequestHandler<UpdateCategoryCommand, CommandResponse<CategoryModel>>, UpdateCategoryCommandHandler>();
-builder.Services.AddTransient<IRequestHandler<DeleteCategoryCommand, CommandResponse<CategoryModel>>, DeleteCategoryCommandHandler>();
+builder.Services.AddTransient<IRequestHandler<CreateCategoryCommand, CommandResponse<CategoryDTO>>, CreateCategoryCommandHandler>();
+builder.Services.AddTransient<IRequestHandler<GetCategoryQuery, CommandResponse<CategoryDTO>>, GetCategoryCommandHandler>();
+builder.Services.AddTransient<IRequestHandler<GetCategoriesQuery, CommandResponse<IEnumerable<CategoryDTO>>>, GetCategoriesCommandHandler>();
+builder.Services.AddTransient<IRequestHandler<UpdateCategoryCommand, CommandResponse<CategoryDTO>>, UpdateCategoryCommandHandler>();
+builder.Services.AddTransient<IRequestHandler<DeleteCategoryCommand, CommandResponse<CategoryDTO>>, DeleteCategoryCommandHandler>();
 
-builder.Services.AddTransient<IRequestHandler<CreatePurchaseCommand, CommandResponse<PurchaseModel>>, CreatePurchaseCommandHandler>();
-builder.Services.AddTransient<IRequestHandler<GetPurchaseQuery, CommandResponse<PurchaseModel>>, GetPurchaseCommandHandler>();
-builder.Services.AddTransient<IRequestHandler<GetPurchasesQuery, CommandResponse<IEnumerable<PurchaseModel>>>, GetPurchasesCommandHandler>();
-builder.Services.AddTransient<IRequestHandler<UpdatePurchaseCommand, CommandResponse<PurchaseModel>>, UpdatePurchaseCommandHandler>();
-builder.Services.AddTransient<IRequestHandler<DeletePurchaseCommand, CommandResponse<PurchaseModel>>, DeletePurchaseCommandHandler>();
+builder.Services.AddTransient<IRequestHandler<CreatePurchaseCommand, CommandResponse<PurchaseDTO>>, CreatePurchaseCommandHandler>();
+builder.Services.AddTransient<IRequestHandler<GetPurchaseQuery, CommandResponse<PurchaseDTO>>, GetPurchaseCommandHandler>();
+builder.Services.AddTransient<IRequestHandler<GetPurchasesQuery, CommandResponse<IEnumerable<PurchaseDTO>>>, GetPurchasesCommandHandler>();
+builder.Services.AddTransient<IRequestHandler<UpdatePurchaseCommand, CommandResponse<PurchaseDTO>>, UpdatePurchaseCommandHandler>();
+builder.Services.AddTransient<IRequestHandler<DeletePurchaseCommand, CommandResponse<PurchaseDTO>>, DeletePurchaseCommandHandler>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

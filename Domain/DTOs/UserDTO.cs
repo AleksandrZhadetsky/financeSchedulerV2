@@ -1,6 +1,6 @@
-﻿namespace Domain.Models
+﻿namespace Domain.DTOs
 {
-    public class UserModel
+    public class UserDTO
     {
         public string Id { get; set; }
 

@@ -1,13 +1,13 @@
 ﻿using DAL.DbContext;
-using Domain.Categories;
+using Domain.Entities.Categories;
 
 namespace Services.Categories
 {
-    public class CategoriesService : ICategoryProcessingService
+    public class CategoryProcessingService : ICategoryProcessingService
     {
         private readonly AuthDbContext context;
 
-        public CategoriesService(AuthDbContext context)
+        public CategoryProcessingService(AuthDbContext context)
         {
             this.context = context;
         }
@@ -15,7 +15,7 @@ namespace Services.Categories
         /// <inheritdoc/>
         public ValueTask<Category> GetCategoryAsync(string id, CancellationToken cancellationToken)
         {
-            var category = context.Categories.FindAsync(id, cancellationToken);
+            var category = context.Categories.FindAsync(id);
 
             // returning Task<T> without await because the signature of called method and caller are the same (GetCategoryAsync and FindAsync)
             return category;

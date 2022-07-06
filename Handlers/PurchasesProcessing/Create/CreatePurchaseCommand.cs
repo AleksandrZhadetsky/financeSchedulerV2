@@ -1,10 +1,10 @@
-﻿using Domain.Models;
+﻿using Domain.DTOs;
 using Domain.Responses;
 using MediatR;
 
 namespace Handlers.PurchasesProcessing.Create
 {
-    public class CreatePurchaseCommand : IRequest<CommandResponse<PurchaseModel>>
+    public class CreatePurchaseCommand : IRequest<CommandResponse<PurchaseDTO>>
     {
         public string Name { get; set; }
         public double Cost { get; set; }

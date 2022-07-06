@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Domain.Models;
+using Domain.DTOs;
 using Domain.Responses;
 using MediatR;
 using Services.Purchases;
 
 namespace Handlers.PurchasesProcessing.Delete
 {
-    public class DeletePurchaseCommandHandler : IRequestHandler<DeletePurchaseCommand, CommandResponse<PurchaseModel>>
+    public class DeletePurchaseCommandHandler : IRequestHandler<DeletePurchaseCommand, CommandResponse<PurchaseDTO>>
     {
         private readonly IPurchaseProcessingService service;
         private readonly IMapper mapper;
@@ -17,11 +17,11 @@ namespace Handlers.PurchasesProcessing.Delete
             this.mapper = mapper;
         }
 
-        public async Task<CommandResponse<PurchaseModel>> Handle(DeletePurchaseCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<PurchaseDTO>> Handle(DeletePurchaseCommand request, CancellationToken cancellationToken)
         {
-            await service.DeletePurchaseAsync(request.Id);
+            await service.DeletePurchaseAsync(request.Id, cancellationToken);
 
-            return new CommandResponse<PurchaseModel>(default(PurchaseModel), "Purchase item deletet successfully.");
+            return new CommandResponse<PurchaseDTO>(default(PurchaseDTO), "Purchase item deletet successfully.");
         }
     }
 }

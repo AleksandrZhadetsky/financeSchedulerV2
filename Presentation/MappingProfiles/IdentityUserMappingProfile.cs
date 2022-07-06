@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Domain.Models;
-using Domain.User;
+using Domain.DTOs;
+using Domain.Entities.User;
 
 namespace FinanceSchedulerDemo.MappingProfiles
 {
@@ -8,7 +8,7 @@ namespace FinanceSchedulerDemo.MappingProfiles
     {
         public IdentityUserMappingProfile()
         {
-            CreateMap<AppUser, UserModel>()
+            CreateMap<AppUser, UserDTO>()
                 .ForMember(user => user.Id, options => options.MapFrom(identityUser => identityUser.Id))
                 .ForMember(user => user.UserName, options => options.MapFrom(identityUser => identityUser.UserName))
                 .ForMember(user => user.Email, options => options.MapFrom(identityUser => identityUser.Email))

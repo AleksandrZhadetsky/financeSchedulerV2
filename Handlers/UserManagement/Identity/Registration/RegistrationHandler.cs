@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Domain.Models;
+using Domain.DTOs;
 using Domain.Responses.Identity;
 using Domain.Roles;
-using Domain.User;
+using Domain.Entities.User;
 using Handlers.Security;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -64,7 +64,7 @@ namespace Handlers.User.Identity.Registration
             await userManager.AddToRoleAsync(user, UserRoles.UserRole);
 
             var token = await tokenGenerator.GetTokenAsync(user);
-            var userModel = mapper.Map<AppUser, UserModel>(user);
+            var userModel = mapper.Map<AppUser, UserDTO>(user);
 
             return new IdentityResponse(userModel, token, true);
         }

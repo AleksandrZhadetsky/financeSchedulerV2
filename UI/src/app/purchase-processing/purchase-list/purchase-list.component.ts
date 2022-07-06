@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { PurchaseModel } from 'src/app/models/purchases/purchase-model';
 
 @Component({
   selector: 'app-purchase-list',
   templateUrl: './purchase-list.component.html',
-  styleUrls: ['./purchase-list.component.scss']
+  styleUrls: ['./purchase-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PurchaseListComponent implements OnInit {
+export class PurchaseListComponent {
+  @Input() purchases$!: Observable<PurchaseModel[]>;
+
+  public displayedColumns = [
+    'Name',
+    'Cost',
+    'Count',
+    'Category',
+    'CreationDate'
+  ];
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

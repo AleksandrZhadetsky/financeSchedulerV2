@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Purchases
+namespace Domain.Entities.Purchases
 {
     public class Purchase
     {
@@ -11,12 +11,12 @@ namespace Domain.Purchases
 
         public double Cost { get; set; }
 
-        public DateTime RegistrationDate { get; set; }
+        public int Count { get; set; }
 
         public string CreatedById { get; set; }
 
-        public int Count { get; set; }
-
         public string CategoryId { get; set; }
+
+        public DateTime CreationDate { get; set; }
     }
 }

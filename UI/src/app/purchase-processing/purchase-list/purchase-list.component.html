@@ -1,1 +1,16 @@
-<p>purchase-list works!</p>
+<table class="table fixed_header">
+  <thead>
+    <tr>
+      <th *ngFor="let columnHeader of displayedColumns" scope="col">{{columnHeader}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let purchase of (purchases$ | async)">
+      <th scope="row" style="color: green;">{{purchase.name}}</th>
+      <td>{{purchase.cost}}</td>
+      <td>{{purchase.count}}</td>
+      <td>{{purchase.category.name}}</td>
+      <td>{{purchase.creationDate | date}}</td>
+    </tr>
+  </tbody>
+</table>

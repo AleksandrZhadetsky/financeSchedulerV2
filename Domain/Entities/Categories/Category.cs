@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Categories
+namespace Domain.Entities.Categories
 {
     public class Category
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Domain.Models;
-using Domain.Purchases;
+using Domain.DTOs;
+using Domain.Entities.Purchases;
 using Handlers.PurchasesProcessing.Create;
 using Handlers.PurchasesProcessing.Update;
 
@@ -10,20 +10,20 @@ namespace FinanceSchedulerDemo.MappingProfiles
     {
         public PurchaseProfile()
         {
-            CreateMap<Purchase, PurchaseModel>()
+            CreateMap<Purchase, PurchaseDTO>()
                 .ForMember(model => model.Id, options => options.MapFrom(purchase => purchase.Id))
                 .ForMember(model => model.Name, options => options.MapFrom(purchase => purchase.Name))
                 .ForMember(model => model.Cost, options => options.MapFrom(purchase => purchase.Cost))
                 .ForMember(model => model.Count, options => options.MapFrom(purchase => purchase.Count))
                 .ForMember(model => model.CategoryId, options => options.MapFrom(purchase => purchase.CategoryId))
-                .ForMember(model => model.CreatedById, options => options.MapFrom(purchase => purchase.CreatedById))
+                .ForMember(model => model.CreationDate, options => options.MapFrom(purchase => purchase.CreationDate))
                 .ReverseMap()
                 .ForMember(purchase => purchase.Id, options => options.MapFrom(model => model.Id))
                 .ForMember(purchase => purchase.Name, options => options.MapFrom(model => model.Name))
                 .ForMember(purchase => purchase.Cost, options => options.MapFrom(model => model.Cost))
                 .ForMember(purchase => purchase.Count, options => options.MapFrom(model => model.Count))
                 .ForMember(purchase => purchase.CategoryId, options => options.MapFrom(model => model.CategoryId))
-                .ForMember(purchase => purchase.CreatedById, options => options.MapFrom(model => model.CreatedById));
+                .ForMember(purchase => purchase.CreationDate, options => options.MapFrom(model => model.CreationDate));
 
             CreateMap<Purchase, UpdatePurchaseCommand>()
                 .ForMember(command => command.Id, options => options.MapFrom(purchase => purchase.Id))

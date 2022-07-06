@@ -5,15 +5,17 @@ import { PurchaseListComponent } from "./purchase-list/purchase-list.component";
 import { FormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { MatTableModule } from "@angular/material/table";
 import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [CreatePurchaseComponent, PurchaseListComponent],
-  exports: [CreatePurchaseComponent],
+  exports: [CreatePurchaseComponent, PurchaseListComponent],
   imports: [
     CommonModule,
     FormsModule,
     MatFormFieldModule,
+    MatTableModule,
     MatInputModule,
     MatSelectModule,
   ],

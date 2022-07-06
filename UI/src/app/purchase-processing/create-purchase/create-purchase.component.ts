@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Observable } from "rxjs/internal/Observable";
 import { CategoryModel } from "src/app/models/categories/category-model";
 import { PurchaseCreationModel } from "src/app/models/purchases/purchase-creation-model";
 
@@ -9,7 +10,7 @@ import { PurchaseCreationModel } from "src/app/models/purchases/purchase-creatio
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreatePurchaseComponent {
-  @Input() categories!: CategoryModel[];
+  @Input() categories$!: Observable<CategoryModel[]>;
 
   @Output() purchaseCreated = new EventEmitter<PurchaseCreationModel>();
 
@@ -19,7 +20,7 @@ export class CreatePurchaseComponent {
   public itemsCount!: number;
   public categoryId!: string;
 
-  constructor() {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
   public onPurchaseCreationTriggered(): void {
     this.purchaseCreated.emit({

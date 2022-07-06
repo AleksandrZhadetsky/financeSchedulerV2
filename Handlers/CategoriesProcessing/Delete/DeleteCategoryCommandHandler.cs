@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Domain.Models;
+using Domain.DTOs;
 using Domain.Responses;
 using MediatR;
 using Services.Categories;
 
 namespace Handlers.CategoriesProcessing.Delete
 {
-    public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, CommandResponse<CategoryModel>>
+    public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, CommandResponse<CategoryDTO>>
     {
         private readonly ICategoryProcessingService service;
         private readonly IMapper mapper;
@@ -17,11 +17,11 @@ namespace Handlers.CategoriesProcessing.Delete
             this.mapper = mapper;
         }
 
-        public async Task<CommandResponse<CategoryModel>> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<CategoryDTO>> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
             await service.DeleteCategoryAsync(request.Id, cancellationToken);
 
-            return new CommandResponse<CategoryModel>(default(CategoryModel), "Category item deletet successfully.");
+            return new CommandResponse<CategoryDTO>(default(CategoryDTO), "Category item deletet successfully.");
         }
     }
 }

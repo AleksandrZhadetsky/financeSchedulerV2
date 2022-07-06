@@ -1,38 +1,44 @@
 ﻿using AutoMapper;
-using Domain.Models;
-using Domain.Purchases;
+using Domain.DTOs;
+using Domain.Entities.Categories;
+using Domain.Entities.Purchases;
 using Domain.Responses;
 using MediatR;
+using Services.Categories;
 using Services.Purchases;
 
 namespace Handlers.PurchasesProcessing.Create
 {
-    public class CreatePurchaseCommandHandler : IRequestHandler<CreatePurchaseCommand, CommandResponse<PurchaseModel>>
+    public class CreatePurchaseCommandHandler : IRequestHandler<CreatePurchaseCommand, CommandResponse<PurchaseDTO>>
     {
-        private readonly IPurchaseProcessingService service;
+        private readonly IPurchaseProcessingService _purchaseProcessingService;
+        private readonly ICategoryProcessingService _categoryProcessingservice;
         private readonly IMapper mapper;
 
-        public CreatePurchaseCommandHandler(IPurchaseProcessingService service, IMapper mapper)
+        public CreatePurchaseCommandHandler(IPurchaseProcessingService purchaseProcessingService, ICategoryProcessingService categoryProcessingservice, IMapper mapper)
         {
-            this.service = service;
+            this._purchaseProcessingService = purchaseProcessingService;
+            this._categoryProcessingservice = categoryProcessingservice;
             this.mapper = mapper;
         }
 
-        public async Task<CommandResponse<PurchaseModel>> Handle(CreatePurchaseCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<PurchaseDTO>> Handle(CreatePurchaseCommand request, CancellationToken cancellationToken)
         {
             var purchase = mapper.Map<CreatePurchaseCommand, Purchase>(request);
 
             try
             {
-                var createdPurchase = await service.CreatePurchaseAsync(purchase);
-                var purchaseModel = mapper.Map<Purchase, PurchaseModel>(createdPurchase);
-                var response = new CommandResponse<PurchaseModel>(purchaseModel, "Purchase item created successfully.");
+                var createdPurchase = await _purchaseProcessingService.CreatePurchaseAsync(purchase, cancellationToken);
+                var category = await _categoryProcessingservice.GetCategoryAsync(createdPurchase.CategoryId, cancellationToken);
+                var purchaseDTO = mapper.Map<Purchase, PurchaseDTO>(createdPurchase);
+                purchaseDTO.Category = mapper.Map<Category, CategoryDTO>(category);
+                var response = new CommandResponse<PurchaseDTO>(purchaseDTO, "Purchase item created successfully.");
 
                 return response;
             }
             catch (System.Exception e)
             {
-                return new CommandResponse<PurchaseModel>($"Purchase creation failed. Reason: {e.Message}");
+                return new CommandResponse<PurchaseDTO>($"Purchase creation failed. Reason: {e.Message}");
             }
         }
     }

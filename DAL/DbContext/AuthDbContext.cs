@@ -1,6 +1,6 @@
-﻿using Domain.Categories;
-using Domain.Purchases;
-using Domain.User;
+﻿using Domain.Entities.Categories;
+using Domain.Entities.Purchases;
+using Domain.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

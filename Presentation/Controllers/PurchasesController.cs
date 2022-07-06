@@ -29,7 +29,7 @@ namespace FinanceSchedulerDemo.Controllers
             return Created("", response);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("get")]
         public async Task<IActionResult> GetPurchaseAsync(GetPurchaseQuery query, CancellationToken cancellationToken)
         {
@@ -38,7 +38,7 @@ namespace FinanceSchedulerDemo.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("getAll")]
         public async Task<IActionResult> GetPurchasesAsync(CancellationToken cancellationToken)
         {

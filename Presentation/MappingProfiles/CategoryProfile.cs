@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Domain.Categories;
-using Domain.Models;
+using Domain.Entities.Categories;
+using Domain.DTOs;
 using Handlers.CategoriesProcessing.Create;
 using Handlers.CategoriesProcessing.Update;
 
@@ -10,7 +10,7 @@ namespace FinanceSchedulerDemo.MappingProfiles
     {
         public CategoryProfile()
         {
-            CreateMap<Category, CategoryModel>()
+            CreateMap<Category, CategoryDTO>()
                 .ForMember(model => model.Id, options => options.MapFrom(category => category.Id))
                 .ForMember(model => model.Name, options => options.MapFrom(category => category.Name))
                 .ForMember(model => model.Description, options => options.MapFrom(category => category.Description))

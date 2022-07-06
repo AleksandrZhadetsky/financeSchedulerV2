@@ -32,7 +32,7 @@ export class CategoryManagementService {
       .pipe(
         tap((response) => {
           if (!!response.responseModel) {
-            this.store.categories.push(response.responseModel);
+            this.store.categories.next([...this.store.categories.value, response.responseModel]);
           }
         }),
         catchError((error) => {
@@ -52,7 +52,7 @@ export class CategoryManagementService {
       .pipe(
         tap((response) => {
           if (!!response.responseModel) {
-            this.store.categories.concat(response.responseModel);
+            this.store.categories.next(response.responseModel);
           }
         }),
         catchError((error) => {
