@@ -1,5 +1,5 @@
-<div class="d-flex flex-column justify-content-around">
-  <div class="d-flex flex-row justify-content-between">
+<div class="d-flex flex-row justify-content-around">
+  <div class="d-flex flex-column justify-content-between">
     <div class="padding-1rem">
       <mat-card class="general-info-card">
         <mat-card-title> General Info </mat-card-title>
@@ -15,42 +15,43 @@
       </mat-card>
     </div>
 
-    <div class="padding-1rem">
-      <mat-accordion>
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title> Register your purchase </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-card>
-            <mat-card-content>
-              <app-create-purchase
-              (purchaseCreated)="onPurchaseCreationStarted($event)"
-              [categories$]="categories$"
-            ></app-create-purchase>
-            </mat-card-content>
-          </mat-card>
-        </mat-expansion-panel>
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title> Add category </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-card>
-            <mat-card-content>
-              <app-create-category
-              (categoryCreationStarted)="onCategoryCreationStarted($event)"
-            ></app-create-category>
-            </mat-card-content>
-          </mat-card>
-        </mat-expansion-panel>
-      </mat-accordion>
+    <div
+      class="box-shadow w-50"
+    >
+      <app-purchase-list
+        [purchases$]="purchases$"
+      ></app-purchase-list>
     </div>
   </div>
 
-  <div
-    class="box-shadow w-50"
-  >
-    <app-purchase-list
-      [purchases$]="purchases$"
-    ></app-purchase-list>
+  <div class="padding-1rem">
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Register your purchase </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+          <mat-card-content>
+            <app-create-purchase
+            (purchaseCreated)="onPurchaseCreationStarted($event)"
+            [categories$]="categories$"
+          ></app-create-purchase>
+          </mat-card-content>
+        </mat-card>
+      </mat-expansion-panel>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Add category </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+          <mat-card-content>
+            <app-create-category
+            (categoryCreationStarted)="onCategoryCreationStarted($event)"
+          ></app-create-category>
+          </mat-card-content>
+        </mat-card>
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
+
 </div>
