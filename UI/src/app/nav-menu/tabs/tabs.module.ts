@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
     DialogHandlerComponent
   ],
   exports: [
+    LoginTabComponent,
+    RegistrationTabComponent,
     DialogHandlerComponent
   ],
   imports: [

@@ -6,13 +6,14 @@ import { CategoryCreationModel } from "src/app/models/categories/category-creati
 import { CategoryModel } from "src/app/models/categories/category-model";
 import { PurchaseCreationModel } from "src/app/models/purchases/purchase-creation-model";
 import { PurchaseModel } from "src/app/models/purchases/purchase-model";
-import { CategoryManagementService } from "src/app/services/category-management/category-management.service";
-import { PurchaseManagementService } from "src/app/services/purchase-management/purchase-management.service";
+import { CategoryProcessingService } from "src/app/services/category-processing/category-processing.service";
+import { PurchaseProcessingService } from "src/app/services/purchase-processing/purchase-processing.service";
 import { AppStateService } from "src/app/state/app-state.service";
 import { IdentityUser } from "../../models/identity/user/identityUser";
 import { IdentityService } from "../../services/identity/identity.service";
 
 @Component({
+  selector: "app-account-page",
   templateUrl: "./user-account-page.component.html",
   styleUrls: ["./user-account-page.component.scss"],
 })
@@ -28,8 +29,8 @@ export class UserAccountPageComponent implements OnInit {
 
   constructor(
     private identityService: IdentityService,
-    private purchaseService: PurchaseManagementService,
-    private categoryService: CategoryManagementService,
+    private purchaseService: PurchaseProcessingService,
+    private categoryService: CategoryProcessingService,
     private store: AppStateService,
     private snackBar: MatSnackBar
   ) {

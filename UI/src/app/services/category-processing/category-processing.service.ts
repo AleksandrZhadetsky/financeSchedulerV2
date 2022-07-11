@@ -12,7 +12,7 @@ import { environment } from "src/environments/environment";
 @Injectable({
   providedIn: "root",
 })
-export class CategoryManagementService {
+export class CategoryProcessingService {
   private readonly controller = "categories";
   private readonly createAction = "create";
   private readonly getAllAction = "getAll";

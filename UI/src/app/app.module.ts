@@ -19,7 +19,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { DialogsModule } from "./dialogs/dialogs.module";
 import { UserAccountPageComponent } from "./account/user-account-page/user-account-page.component";
 import { AuthGuard } from "./services/identity/auth-guard/auth-guard";
-import { PurchaseListComponent } from "./purchase-processing/purchase-list/purchase-list.component";
 import { PurchasesModule } from "./purchase-processing/purchases.module";
 import { JwtInterceptor } from "./services/identity/jwt.interceptor";
 
@@ -39,7 +38,6 @@ import { JwtInterceptor } from "./services/identity/jwt.interceptor";
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent, pathMatch: "full" },
-      { path: 'account/:id', component: UserAccountPageComponent, canActivate: [AuthGuard] },
     ]),
     BrowserAnimationsModule,
     PurchasesModule,
