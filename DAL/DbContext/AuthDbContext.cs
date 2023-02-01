@@ -16,6 +16,13 @@ namespace DAL.DbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // modelBuilder.Entity<AppUser>()
+            //     .HasMany(u => u.Purchases)
+            //     .WithOne(p => p.AppUser)
+            //     .HasForeignKey(p => p.AppUserId)
+            //     .HasPrincipalKey(u => u.Id)
+            //     .HasConstraintName("one2many");
+
             modelBuilder.Entity<Purchase>()
                 .HasKey(p => p.Id);
 

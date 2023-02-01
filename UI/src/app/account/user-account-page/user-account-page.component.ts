@@ -1,21 +1,21 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatAccordion } from "@angular/material/expansion";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Observable } from "rxjs";
-import { CategoryCreationModel } from "src/app/models/categories/category-creation-model";
-import { CategoryModel } from "src/app/models/categories/category-model";
-import { PurchaseCreationModel } from "src/app/models/purchases/purchase-creation-model";
-import { PurchaseModel } from "src/app/models/purchases/purchase-model";
-import { CategoryProcessingService } from "src/app/services/category-processing/category-processing.service";
-import { PurchaseProcessingService } from "src/app/services/purchase-processing/purchase-processing.service";
-import { AppStateService } from "src/app/state/app-state.service";
-import { IdentityUser } from "../../models/identity/user/identityUser";
-import { IdentityService } from "../../services/identity/identity.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
+import { CategoryCreationModel } from '../../models/categories/category-creation-model';
+import { CategoryModel } from '../../models/categories/category-model';
+import { IdentityUser } from '../../models/identity/user/identityUser';
+import { PurchaseCreationModel } from '../../models/purchases/purchase-creation-model';
+import { PurchaseModel } from '../../models/purchases/purchase-model';
+import { CategoryProcessingService } from '../../services/category-processing/category-processing.service';
+import { IdentityService } from '../../services/identity/identity.service';
+import { PurchaseProcessingService } from '../../services/purchase-processing/purchase-processing.service';
+import { AppStateService } from '../../state/app-state.service';
 
 @Component({
-  selector: "app-account-page",
-  templateUrl: "./user-account-page.component.html",
-  styleUrls: ["./user-account-page.component.scss"],
+  selector: 'app-account-page',
+  templateUrl: './user-account-page.component.html',
+  styleUrls: ['./user-account-page.component.scss'],
 })
 export class UserAccountPageComponent implements OnInit {
   @ViewChild(MatAccordion) accordion!: MatAccordion;
@@ -41,18 +41,16 @@ export class UserAccountPageComponent implements OnInit {
     this.createdById = this.identityService.userValue.id;
     this.categories$ = this.store.categories$;
     if (!this.store.categories.value.length) {
-      this.categoryService.getCategories()
-        .subscribe(categories => {
-          this.store.categories.next(categories.responseModel);
-        });
+      this.categoryService.getCategories().subscribe((categories) => {
+        this.store.categories.next(categories.responseModel);
+      });
     }
 
     this.purchases$ = this.store.purchases$;
     if (!this.store.purchases.value.length) {
-      this.purchaseService.getPurchases()
-        .subscribe(purchases => {
-          this.store.purchases.next(purchases.responseModel);
-        });
+      this.purchaseService.getPurchases().subscribe((purchases) => {
+        this.store.purchases.next(purchases.responseModel);
+      });
     }
   }
 
@@ -70,24 +68,19 @@ export class UserAccountPageComponent implements OnInit {
       .subscribe();
 
     this.accordion.closeAll();
-    this.openSnackBar('Purchase created.', 'Ok')
+    this.openSnackBar('Purchase created.', 'Ok');
   }
 
   public onCategoryCreationStarted(event: CategoryCreationModel): void {
     this.categoryService
-      .createCategory(
-        new CategoryCreationModel(
-          event.name,
-          event.description
-        )
-      )
+      .createCategory(new CategoryCreationModel(event.name, event.description))
       .subscribe();
 
     this.accordion.closeAll();
-    this.openSnackBar('Category created.', 'Ok')
+    this.openSnackBar('Category created.', 'Ok');
   }
 
   private openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message, action);
+    this.snackBar.open(message, action, { duration: 3000 });
   }
 }

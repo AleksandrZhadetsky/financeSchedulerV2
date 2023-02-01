@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { PurchaseModel } from 'src/app/models/purchases/purchase-model';
+import { PurchaseModel } from '../../models/purchases/purchase-model';
 
 @Component({
   selector: 'app-purchase-list',

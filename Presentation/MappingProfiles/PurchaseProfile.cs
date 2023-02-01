@@ -43,13 +43,13 @@ namespace FinanceSchedulerDemo.MappingProfiles
                 .ForMember(command => command.Cost, options => options.MapFrom(purchase => purchase.Cost))
                 .ForMember(command => command.Count, options => options.MapFrom(purchase => purchase.Count))
                 .ForMember(command => command.CategoryId, options => options.MapFrom(purchase => purchase.CategoryId))
-                .ForMember(model => model.CreatedById, options => options.MapFrom(purchase => purchase.CreatedById))
+                .ForMember(model => model.CreatedById, options => options.MapFrom(purchase => purchase.AppUserId))
                 .ReverseMap()
                 .ForMember(purchase => purchase.Name, options => options.MapFrom(command => command.Name))
                 .ForMember(purchase => purchase.Cost, options => options.MapFrom(command => command.Cost))
                 .ForMember(purchase => purchase.Count, options => options.MapFrom(command => command.Count))
                 .ForMember(purchase => purchase.CategoryId, options => options.MapFrom(command => command.CategoryId))
-                .ForMember(purchase => purchase.CreatedById, options => options.MapFrom(command => command.CreatedById));
+                .ForMember(purchase => purchase.AppUserId, options => options.MapFrom(command => command.CreatedById));
         }
     }
 }

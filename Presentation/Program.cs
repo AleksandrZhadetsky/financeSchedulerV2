@@ -44,7 +44,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(
         {
             options.Password.RequireDigit = false;
             options.Password.RequireLowercase = false;
-            options.Password.RequiredLength = 5;
+            options.Password.RequiredLength = 4;
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequireUppercase = false;
         }

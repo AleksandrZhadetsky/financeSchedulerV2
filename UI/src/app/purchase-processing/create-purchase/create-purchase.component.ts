@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
-import { CategoryModel } from "src/app/models/categories/category-model";
-import { PurchaseCreationModel } from "src/app/models/purchases/purchase-creation-model";
+import { CategoryModel } from "../../models/categories/category-model";
+import { PurchaseCreationModel } from "../../models/purchases/purchase-creation-model";
+import { AppStateService } from "../../state/app-state.service";
 
 @Component({
   selector: "app-create-purchase",
@@ -20,15 +21,15 @@ export class CreatePurchaseComponent {
   public itemsCount!: number;
   public categoryId!: string;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private stateService: AppStateService) {}
 
-  public onPurchaseCreationTriggered(): void {
+  public onPurchaseCreation(): void {
     this.purchaseCreated.emit({
       name: this.purchaseName,
       cost: this.purchaseCost,
       count: this.itemsCount,
       categoryId: this.categoryId,
-      createdById: ''
+      createdById: this.stateService.user.value.id
     });
   }
 }

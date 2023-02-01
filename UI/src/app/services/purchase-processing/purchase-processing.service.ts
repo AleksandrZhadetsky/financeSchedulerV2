@@ -2,12 +2,12 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { tap, catchError } from "rxjs/operators";
-import { DeleteCommand } from "src/app/models/commands/delete-command";
-import { PurchaseCreationModel } from "src/app/models/purchases/purchase-creation-model";
-import { PurchaseModel } from "src/app/models/purchases/purchase-model";
-import { CommandResponse } from "src/app/models/responses/command-response";
-import { AppStateService } from "src/app/state/app-state.service";
-import { environment } from "src/environments/environment";
+import { environment } from "../../../environments/environment";
+import { DeleteCommand } from "../../models/commands/delete-command";
+import { PurchaseCreationModel } from "../../models/purchases/purchase-creation-model";
+import { PurchaseModel } from "../../models/purchases/purchase-model";
+import { CommandResponse } from "../../models/responses/command-response";
+import { AppStateService } from "../../state/app-state.service";
 
 @Injectable({
   providedIn: "root",

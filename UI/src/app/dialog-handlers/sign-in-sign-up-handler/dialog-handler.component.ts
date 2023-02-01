@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginDialogComponent } from 'src/app/dialogs/login-dialog/login-dialog.component';
-import { RegistrationDialogComponent } from 'src/app/dialogs/registration-dialog/registration-dialog.component';
+import { LoginDialogComponent } from '../../dialogs/login-dialog/login-dialog.component';
+import { RegistrationDialogComponent } from '../../dialogs/registration-dialog/registration-dialog.component';
 
 @Component({
   selector: 'app-auth-handler',

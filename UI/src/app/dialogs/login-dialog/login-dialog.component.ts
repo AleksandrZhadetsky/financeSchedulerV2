@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Router } from "@angular/router";
-import { SignInRequest } from "src/app/models/identity/requests/signInRequest";
-import { IdentityService } from "src/app/services/identity/identity.service";
+import { SignInRequest } from "../../models/identity/requests/signInRequest";
+import { IdentityService } from "../../services/identity/identity.service";
 
 @Component({
   selector: "app-login-dialog",

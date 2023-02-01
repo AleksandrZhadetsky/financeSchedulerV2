@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domain.Entities.Purchases;
+using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities.User
 {
     public class AppUser : IdentityUser
     {
         public double Balance { get; private set; }
+        public IEnumerable<Purchase> Purchases { get; set; }
 
         public AppUser()
         {

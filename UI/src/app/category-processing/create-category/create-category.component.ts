@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from "@angular/core";
-import { CategoryCreationModel } from "src/app/models/categories/category-creation-model";
+import { CategoryCreationModel } from "../../models/categories/category-creation-model";
 
 @Component({
   selector: "app-create-category",

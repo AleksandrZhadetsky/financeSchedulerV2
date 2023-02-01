@@ -45,6 +45,7 @@
           </li>
           <li
             *ngIf="service.isAuthenticated() | async"
+            id="logout-btn"
             class="nav-item"
             [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{ exact: true }"

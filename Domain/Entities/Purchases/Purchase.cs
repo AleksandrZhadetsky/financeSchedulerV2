@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Domain.Entities.User;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities.Purchases
 {
@@ -13,7 +14,9 @@ namespace Domain.Entities.Purchases
 
         public int Count { get; set; }
 
-        public string CreatedById { get; set; }
+        public string AppUserId { get; set; }
+
+        public AppUser AppUser { get; set; }
 
         public string CategoryId { get; set; }
 
