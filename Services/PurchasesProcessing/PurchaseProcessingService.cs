@@ -47,10 +47,10 @@ namespace Services.Purchases
         /// <inheritdoc/>
         public async ValueTask<Purchase> UpdatePurchaseAsync(Purchase purchase, CancellationToken cancellationToken)
         {
-            var updatedCategory = context.Purchases.Update(purchase);
+            var updatedPurchases = context.Purchases.Update(purchase);
             await context.SaveChangesAsync(cancellationToken);
 
-            return updatedCategory.Entity;
+            return updatedPurchases.Entity;
         }
     }
 }
