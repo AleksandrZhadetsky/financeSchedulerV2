@@ -6,42 +6,42 @@ namespace Services.Purchases.Tests
     public class PurchaseProcessingServiceTests
     {
         [TestMethod()]
-        public void GetPurchaseAsync_GivenValidPurchaseId_PurchaseReturned()
+        public void FakeTest1()
         {
             // Assert
             Assert.AreEqual(4, 2 + 2);
         }
 
         [TestMethod()]
-        public void GetPurchaseAsync_GivenInvalidPurchaseId_ExceptionThrown()
+        public void FakeTest2()
         {
             // Assert
             Assert.AreEqual(4, 2 + 2);
         }
 
         [TestMethod()]
-        public void GetPurchasesAsyncScenarioResults()
+        public void FakeTest3()
         {
             // Assert
             Assert.AreEqual(4, 2 + 2);
         }
 
         [TestMethod()]
-        public void CreatePurchaseAsyncScenarioResults()
+        public void FakeTest4()
         {
             // Assert
             Assert.AreEqual(4, 2 + 2);
         }
 
         [TestMethod()]
-        public void DeletePurchaseAsyncScenarioResults()
+        public void FakeTest5()
         {
             // Assert
             Assert.AreEqual(4, 2 + 2);
         }
 
         [TestMethod()]
-        public void UpdatePurchaseAsyncScenarioResults()
+        public void FakeTest6()
         {
             // Assert
             Assert.AreEqual(4, 2 + 2);
